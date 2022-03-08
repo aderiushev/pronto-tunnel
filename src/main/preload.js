@@ -9,7 +9,10 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.send('ipc-tunnel', { action: 'stop' });
     },
     saveToClipboard(text) {
-      ipcRenderer.send('ipc-tunnel', { action: 'saveToClipboard', payload: { text } });
+      ipcRenderer.send('ipc-tunnel', {
+        action: 'saveToClipboard',
+        payload: { text },
+      });
     },
     on(channel, func) {
       const validChannels = ['ipc-tunnel'];

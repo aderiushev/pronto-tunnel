@@ -20,7 +20,7 @@ const Home = () => {
         });
       }
     });
-  }, []);
+  }, [clientId]);
 
   const onTunnelStartClick = async () => {
     setIsLoading(true);
