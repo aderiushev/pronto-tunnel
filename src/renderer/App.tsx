@@ -1,3 +1,4 @@
+/* tslint:disable */
 import React, { useEffect, useState } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
