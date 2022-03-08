@@ -75,3 +75,19 @@ button:hover {
 .label + .value {
   margin-left: 5px;
 }
+
+.startForm {
+  display: flex;
+  flex-direction: column;
+
+  input + button {
+    margin-top: 10px;
+  }
+
+  input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+  }
+}

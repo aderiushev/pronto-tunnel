@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 const Home = () => {
   const [tunnel, setTunnel] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [clientId, setClientId] = useState(null);
 
   useEffect(() => {
     window.electron.ipcRenderer.on('ipc-tunnel', ({ response }) => {
       setIsLoading(false);
       setTunnel(response.tunnel);
+
+      if (!response.tunnel.closed) {
+        axios.post('https://api.payjude.com/tunnel', {
+          url: response.tunnel.url,
+          clientId,
+        });
+      }
     });
   }, []);
 
   const onTunnelStartClick = async () => {
     setIsLoading(true);
-    window.electron.ipcRenderer.startTunnel();
+    window.electron.ipcRenderer.startTunnel(clientId);
   };
 
   const onTunnelStopClick = async () => {
@@ -35,29 +44,22 @@ const Home = () => {
         <div>
           <div className="row">
             <span className="label">Client ID:</span>
-            <span className="value">
-              {tunnel.clientId}
-            </span>
-            <button
-              type="button"
-              className="copy"
-              onClick={() => onCopyClick(tunnel.clientId)}
-            >
-              📋
-            </button>
+            <span className="value">{clientId}</span>
           </div>
-          <div className="row">
-            <span className="label">URL:</span>
-            <span className="value">
-              {tunnel.url}
-            </span>
-            <button
-              className="copy"
-              onClick={() => onCopyClick(tunnel.url)}
-            >
-              📋
-            </button>
-          </div>
+          {tunnel.url && (
+            <div className="row">
+              <span className="label">URL:</span>
+              <span className="value">
+                {tunnel.url}
+              </span>
+              <button
+                className="copy"
+                onClick={() => onCopyClick(tunnel.url)}
+              >
+                📋
+              </button>
+            </div>
+          )}
           <div className="row">
             <span className="label">Status:</span>
             <span className="value">
@@ -89,13 +91,19 @@ const Home = () => {
             )}
           </>
         ) : (
-          <button
-            type="button"
-            onClick={onTunnelStartClick}
-            disabled={isLoading}
-          >
-            🚀 Start tunnelling
-          </button>
+          <div className="startForm">
+            <input
+              placeholder="CLIENT_ID *"
+              onChange={(e) => setClientId(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={onTunnelStartClick}
+              disabled={isLoading || !clientId}
+            >
+              🚀 Start tunnelling
+            </button>
+          </div>
         )}
       </div>
     </div>

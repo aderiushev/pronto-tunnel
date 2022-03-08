@@ -14,7 +14,7 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain, clipboard } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import localtunnel from 'localtunnel';
+import ngrok from 'ngrok';
 
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
@@ -29,32 +29,27 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-let tunnel = null;
-
 ipcMain.on('ipc-tunnel', async (event, arg) => {
   if (arg.action === 'start') {
-    tunnel = await localtunnel({ port: 5555 });
+    const url = await ngrok.connect(5555);
 
     event.reply('ipc-tunnel', {
       response: {
         action: arg.action,
         tunnel: {
-          clientId: tunnel.clientId,
-          url: tunnel.url,
-          closed: tunnel.closed,
+          url,
+          closed: false,
         },
       },
     });
   } else if (arg.action === 'stop') {
-    tunnel.close()
-
+    await ngrok.disconnect();
     event.reply('ipc-tunnel', {
       response: {
         action: arg.action,
         tunnel: {
-          clientId: tunnel.clientId,
-          url: tunnel.url,
-          closed: tunnel.closed,
+          url: null,
+          closed: true,
         },
       },
     });
