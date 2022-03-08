@@ -1,7 +1,7 @@
 {
   "name": "pronto-tunnel",
   "description": "Pronto Tunnel",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
     "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts",
@@ -90,8 +90,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "pronto-tunnel",
+      "repo": "pronto-tunnel"
     }
   },
   "license": "MIT",
