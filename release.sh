@@ -1,3 +1,3 @@
-git commit -am v1.0.3
-git tag v1.0.3
+git commit -am v1.0.4
+git tag v1.0.4
 git push && git push --tags
