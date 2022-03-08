@@ -1,7 +1,7 @@
 {
   "name": "pronto-tunnel",
   "description": "Pronto Tunnel",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
     "build:main": "cross-env NODE_ENV=production TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.main.prod.ts",
@@ -90,7 +90,7 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "pronto-tunnel",
+      "owner": "aderiushev",
       "repo": "pronto-tunnel"
     }
   },
