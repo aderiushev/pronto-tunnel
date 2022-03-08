@@ -49,10 +49,9 @@ const Home = () => {
           {tunnel.url && (
             <div className="row">
               <span className="label">URL:</span>
-              <span className="value">
-                {tunnel.url}
-              </span>
+              <span className="value">{tunnel.url}</span>
               <button
+                type="button"
                 className="copy"
                 onClick={() => onCopyClick(tunnel.url)}
               >
@@ -63,7 +62,11 @@ const Home = () => {
           <div className="row">
             <span className="label">Status:</span>
             <span className="value">
-              {tunnel.closed ? <span className="danger">closed</span> : <span className="success">running</span>}
+              {tunnel.closed ? (
+                <span className="danger">closed</span>
+              ) : (
+                <span className="success">running</span>
+              )}
             </span>
           </div>
         </div>
