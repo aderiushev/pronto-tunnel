@@ -31,7 +31,18 @@ let mainWindow: BrowserWindow | null = null;
 
 ipcMain.on('ipc-tunnel', async (event, arg) => {
   if (arg.action === 'start') {
-    const url = await ngrok.connect(5555);
+    const extra =
+      process.env.NODE_ENV === 'development'
+        ? {}
+        : {
+            binPath: (binPath: string) =>
+              binPath.replace('app.asar', 'app.asar.unpacked'),
+          };
+
+    const url = await ngrok.connect({
+      addr: 5555,
+      ...extra,
+    });
 
     event.reply('ipc-tunnel', {
       response: {
@@ -65,8 +76,7 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install();
 }
 
-const isDevelopment =
-  process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
+const isDevelopment = process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
 if (isDevelopment) {
   require('electron-debug')();
