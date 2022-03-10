@@ -15,7 +15,7 @@ const Home = () => {
       setTunnel(response.tunnel);
 
       if (!response.tunnel.closed) {
-        axios.post('https://api.payjude.com/tunnel', {
+        axios.post('https://api.qruto.co/tunnel', {
           url: response.tunnel.url,
           clientId,
         });
