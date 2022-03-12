@@ -84,7 +84,13 @@
     },
     "extraResources": [
       "./assets/**",
-      "./release/app/dist/bin/**"
+      {
+        "from": "./node_modules/.bin/ngrok",
+        "to": "./app/dist/bin/ngrok",
+        "filter": [
+          "**/*"
+        ]
+      }
     ],
     "publish": {
       "provider": "github",
