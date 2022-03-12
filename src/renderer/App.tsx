@@ -25,7 +25,7 @@ const Home = () => {
 
   const onTunnelStartClick = async () => {
     setIsLoading(true);
-    window.electron.ipcRenderer.startTunnel(clientId);
+    window.electron.ipcRenderer.startTunnel();
   };
 
   const onTunnelStopClick = async () => {

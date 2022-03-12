@@ -33,7 +33,8 @@ ipcMain.on('ipc-tunnel', async (event, arg) => {
   if (arg.action === 'start') {
     const url = await ngrok.connect({
       addr: 5555,
-      binPath: (path) => `${app.getPath('exe')}/../resources/assets/`,
+      binPath: () => `${app.getPath('exe')}/../resources/assets/`,
+      authtoken: '2eC3XuJNmWcW4sPBQDd43_5R1As9QGEt4ygjhheZcQp',
     });
 
     event.reply('ipc-tunnel', {
