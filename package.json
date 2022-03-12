@@ -32,11 +32,10 @@
   "build": {
     "productName": "ProntoTunnel",
     "appId": "org.erb.ProntoTunnel",
-    "asar": false,
+    "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
-      "**/*",
-      "./node_modules/"
+      "**/*"
     ],
     "afterSign": ".erb/scripts/notarize.js",
     "mac": {
