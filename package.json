@@ -35,7 +35,8 @@
     "asar": false,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
-      "**/*"
+      "**/*",
+      "./node_modules/"
     ],
     "afterSign": ".erb/scripts/notarize.js",
     "mac": {
@@ -85,7 +86,7 @@
     "extraResources": [
       "./assets/**",
       {
-        "from": "./node_modules/.bin/ngrok.exe",
+        "from": "./node_modules/.bin/ngrok.ext",
         "to": "./app/dist/bin/ngrok.exe",
         "filter": [
           "**/*"
