@@ -84,14 +84,7 @@
       "output": "release/build"
     },
     "extraResources": [
-      "./assets/**",
-      {
-        "from": "./node_modules/.bin/ngrok.ext",
-        "to": "./app/dist/bin/ngrok.exe",
-        "filter": [
-          "**/*"
-        ]
-      }
+      "./assets/**"
     ],
     "publish": {
       "provider": "github",
