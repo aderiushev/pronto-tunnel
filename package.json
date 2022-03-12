@@ -85,8 +85,8 @@
     "extraResources": [
       "./assets/**",
       {
-        "from": "./node_modules/.bin/ngrok",
-        "to": "./app/dist/bin/ngrok",
+        "from": "./node_modules/.bin/ngrok.exe",
+        "to": "./app/dist/bin/ngrok.exe",
         "filter": [
           "**/*"
         ]
