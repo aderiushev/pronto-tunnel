@@ -29,13 +29,23 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
+const connectNginx = () => {
+  return ngrok.connect({
+    addr: 5555,
+    region: 'eu',
+    onStatusChange: (status) => {
+      if (status === 'closed') {
+        connectNginx();
+      }
+    },
+    binPath: () => `${app.getPath('exe')}/../resources/assets/`,
+    authtoken: '2eC3XuJNmWcW4sPBQDd43_5R1As9QGEt4ygjhheZcQp',
+  });
+};
+
 ipcMain.on('ipc-tunnel', async (event, arg) => {
   if (arg.action === 'start') {
-    const url = await ngrok.connect({
-      addr: 5555,
-      binPath: () => `${app.getPath('exe')}/../resources/assets/`,
-      authtoken: '2eC3XuJNmWcW4sPBQDd43_5R1As9QGEt4ygjhheZcQp',
-    });
+    const url = await connectNginx();
 
     event.reply('ipc-tunnel', {
       response: {
