@@ -26,5 +26,4 @@ jobs:
         with:
           node-version: 14
 
-      - name: Prepare for app notarization
       - run: npm run electron:build
