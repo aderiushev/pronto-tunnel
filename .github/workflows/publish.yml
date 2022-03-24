@@ -26,9 +26,12 @@ jobs:
         with:
           node-version: 14
 
-      - run: npm install
-      - run: npm run electron:build
-        env:
-          CI: false
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          windows_certs: ${{ secrets.CSC_LINK }}
+          windows_certs_password: ${{ secrets.CSC_KEY_PASSWORD }}
