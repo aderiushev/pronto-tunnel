@@ -27,7 +27,6 @@ jobs:
           node-version: 14
 
       - name: Prepare for app notarization
-      - run: npm install
       - run: npm run electron:build
         env:
           CI: false
