@@ -14,7 +14,7 @@
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
     "test": "jest --passWithNoTests",
     "prepare": "husky install",
-    "electron:build": "npm run build && tsc -p electron && electron-builder --publish always"
+    "electron:build": "npm run build && electron-builder --publish always"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
