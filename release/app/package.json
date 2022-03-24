@@ -1,6 +1,6 @@
 {
   "name": "pronto-tunnel",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "description": "Pronto tunneling app",
   "main": "./dist/main/main.js",
   "author": {
