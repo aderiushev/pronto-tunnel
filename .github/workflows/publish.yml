@@ -1,28 +1,29 @@
-name: Build/release
+name: publish-build
 
 on:
   push:
-    tags:
-      - v*
-
+    branches:
+      - master
 defaults:
   run:
     working-directory: .
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
+    needs: [version]
 
     strategy:
       matrix:
         os: [windows-latest]
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v2
+      - run: git pull origin main
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
           node-version: 14
 
@@ -33,6 +34,3 @@ jobs:
           CI: false
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-
-
-
